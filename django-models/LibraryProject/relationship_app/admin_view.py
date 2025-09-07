@@ -1,7 +1,6 @@
-from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render
-from .views import is_admin
+from .decorators import role_required
 
-@user_passes_test(is_admin)
+@role_required(allowed_roles=['Admin'])
 def admin_dashboard(request):
-    return render(request, "relationship_app/admin_dashboard.html")
+    return render(request, 'relationship_app/admin_view.html', {})
