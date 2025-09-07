@@ -27,3 +27,10 @@ urlpatterns = [
     path('librarian-dashboard/', librarian_view.LibrarianView.as_view(), name='librarian_view'),
     path('member-dashboard/', member_view.MemberView.as_view(), name='member_view'),
 ]
+
+urlpatterns = [
+    path("books/", views.list_books, name="list_books"),
+    path("books/add/", views.add_book, name="add_book"),
+    path("books/<int:book_id>/edit/", views.edit_book, name="edit_book"),
+    path("books/<int:book_id>/delete/", views.delete_book, name="delete_book"),
+]
