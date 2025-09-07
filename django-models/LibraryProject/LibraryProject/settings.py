@@ -52,6 +52,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'LibraryProject.urls'
+LOGIN_REDIRECT_URL = '/'     # where users go after login
+LOGOUT_REDIRECT_URL = '/'    # where users go after logout
+
 
 TEMPLATES = [
     {
