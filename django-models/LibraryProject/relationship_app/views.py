@@ -6,7 +6,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib import messages
-
+from django.contrib.auth.decorators import user_passes_test, login_required
+from .models import UserProfile
 # Function-based view to list all books
 def list_books(request):
     books = Book.objects.all()   # fetch all books
@@ -55,3 +56,11 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect("home")
+def is_admin(user):
+    return hasattr(user, "userprofile") and user.userprofile.role == "Admin"
+
+def is_librarian(user):
+    return hasattr(user, "userprofile") and user.userprofile.role == "Librarian"
+
+def is_member(user):
+    return hasattr(user, "userprofile") and user.userprofile.role == "Member"
