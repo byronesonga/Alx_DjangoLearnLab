@@ -35,7 +35,7 @@ def list_books_in_library(library_name):
 def get_librarian_for_library(library_name):
     """Retrieve the librarian for a library."""
     try:
-        library = Library.objects.get(library=library_name)
+        library = Library.objects.get(library=library)
         librarian = library.librarian
         print(f"Librarian for {library.name}: {librarian.name}")
     except Library.DoesNotExist:
