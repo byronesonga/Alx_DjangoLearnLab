@@ -8,6 +8,8 @@ from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test, login_required
 from .models import UserProfile
+from django.views.generic import TemplateView
+from django.http import HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import permission_required
 from .models import Book
@@ -17,6 +19,12 @@ def list_books(request):
     return render(request, "relationship_app/list_books.html", {"books": books})
 
 
+class AdminView(TemplateView):
+    template_name = "admin_view.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden("You must be logged in to access this page.")
 # Class-based view for a specific library and its books
 class LibraryDetailView(DetailView):
     model = Library
