@@ -4,7 +4,8 @@ from .views import list_books, LibraryDetailView
 from django.contrib.auth.views import LoginView, LogoutView
 from . import views
 from . import admin_view, librarian_view, member_view
-from .views import AdminView
+
+
 
 urlpatterns = [
     # Function-based view: lists all books
@@ -23,11 +24,6 @@ urlpatterns = [
     # Registration still custom (since Django doesn’t ship one)
     path("register/", views.register_view, name="register"),
 ]
-urlpatterns = [
-    path('admin-dashboard/', admin_view.AdminView.as_view(), name='admin_view'),
-    path('librarian-dashboard/', librarian_view.LibrarianView.as_view(), name='librarian_view'),
-    path('member-dashboard/', member_view.MemberView.as_view(), name='member_view'),
-]
 
 urlpatterns = [
     path("books/", views.list_books, name="list_books"),
@@ -36,6 +32,14 @@ urlpatterns = [
     path("books/<int:book_id>/delete/", views.delete_book, name="delete_book"),
 ]
 
+from django.urls import path
+from .views import admin_view, librarian_view, member_view
+
 urlpatterns = [
-    path("admin-view/", AdminView.as_view(), name="admin_view"),
+    path("admin-dashboard/", admin_view.admin_dashboard, name="admin_dashboard"),
+    path("librarian-dashboard/", librarian_view.librarian_dashboard, name="librarian_dashboard"),
+    path("member-dashboard/", member_view.member_dashboard, name="member_dashboard"),
 ]
+
+
+
