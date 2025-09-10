@@ -1,7 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
 # Create your models here.
 class UserProfile(models.Model):
     ROLE_CHOICES = [
@@ -74,3 +76,11 @@ class Librarian(models.Model):
 
     def __str__(self):
         return f"{self.title} by {self.author}"
+    
+    class CustomUser(AbstractUser):
+           ROLES = [
+        ("Admin", "Admin"),
+        ("Librarian", "Librarian"),
+        ("Member", "Member"),
+    ] 
+           role = models.CharField(max_length=20, choices=ROLES, default="Member")
