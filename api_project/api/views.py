@@ -1,3 +1,4 @@
+from rest_framework import viewsets, permissions
 from rest_framework import viewsets
 from rest_framework import generics
 from .models import Book
@@ -15,3 +16,6 @@ class BookViewSet(viewsets.ModelViewSet):
     """
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+
+    # Apply permissions
+    permission_classes = [permissions.IsAuthenticated]  # Only logged-in users can access
